@@ -2,37 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Video</title>
 <style>
-html,body{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;font-family:Arial,sans-serif}
-.wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-video{width:100%;height:100%;object-fit:contain;background:#000}
-.overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.45);text-align:center;padding:20px}
-button{margin-top:18px;padding:14px 24px;border:none;border-radius:14px;font-size:20px;font-weight:bold;cursor:pointer}
-.hidden{display:none}
+html,body{margin:0;background:#000;height:100%}
+video{width:100vw;height:100vh;object-fit:contain;background:#000}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <video id="vid" controls playsinline webkit-playsinline preload="metadata">
-    <source src="./video.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
-  </video>
-  <div id="overlay" class="overlay">
-    <h1>Toca para ver el video</h1>
-    <button onclick="startVideo()">▶ Reproducir</button>
-  </div>
-</div>
-<script>
-const vid=document.getElementById('vid');
-const overlay=document.getElementById('overlay');
-
-window.addEventListener('load',()=>{
- vid.load();
-});
-document.addEventListener('click',()=>{if(vid.paused) startVideo();},{once:true});
-vid.addEventListener('ended',()=>{vid.currentTime=0;});
-</script>
+<video controls autoplay muted playsinline webkit-playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
 </body>
 </html>
