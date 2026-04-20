@@ -15,32 +15,22 @@ button{margin-top:18px;padding:14px 24px;border:none;border-radius:14px;font-siz
 </head>
 <body>
 <div class="wrap">
-  <video id="vid" muted playsinline webkit-playsinline preload="auto" controls poster="">
-    <source src="video.mp4" type="video/mp4">
+  <video id="vid" controls playsinline webkit-playsinline preload="metadata">
+    <source src="./video.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
   </video>
-  <div id="overlay" class="overlay hidden">
-    <h1>Toca para reproducir</h1>
-    <button onclick="startVideo()">▶ Ver video</button>
+  <div id="overlay" class="overlay">
+    <h1>Toca para ver el video</h1>
+    <button onclick="startVideo()">▶ Reproducir</button>
   </div>
 </div>
 <script>
 const vid=document.getElementById('vid');
 const overlay=document.getElementById('overlay');
-async function tryPlay(){
- try{
-   vid.load();
-   await vid.play();
-   overlay.classList.add('hidden');
- }catch(e){
-   overlay.classList.remove('hidden');
- }
-}
-function startVideo(){
- vid.muted=false;
- vid.play();
- overlay.classList.add('hidden');
-}
-window.addEventListener('load',tryPlay);
+
+window.addEventListener('load',()=>{
+ vid.load();
+});
 document.addEventListener('click',()=>{if(vid.paused) startVideo();},{once:true});
 vid.addEventListener('ended',()=>{vid.currentTime=0;});
 </script>
