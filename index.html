@@ -15,7 +15,7 @@ button{margin-top:18px;padding:14px 24px;border:none;border-radius:14px;font-siz
 </head>
 <body>
 <div class="wrap">
-  <video id="vid" autoplay muted playsinline preload="auto" controls>
+  <video id="vid" muted playsinline webkit-playsinline preload="auto" controls poster="">
     <source src="video.mp4" type="video/mp4">
   </video>
   <div id="overlay" class="overlay hidden">
@@ -27,11 +27,21 @@ button{margin-top:18px;padding:14px 24px;border:none;border-radius:14px;font-siz
 const vid=document.getElementById('vid');
 const overlay=document.getElementById('overlay');
 async function tryPlay(){
- try{await vid.play();}
- catch(e){overlay.classList.remove('hidden');}
+ try{
+   vid.load();
+   await vid.play();
+   overlay.classList.add('hidden');
+ }catch(e){
+   overlay.classList.remove('hidden');
+ }
 }
-function startVideo(){vid.muted=false;vid.play();overlay.classList.add('hidden');}
-tryPlay();
+function startVideo(){
+ vid.muted=false;
+ vid.play();
+ overlay.classList.add('hidden');
+}
+window.addEventListener('load',tryPlay);
+document.addEventListener('click',()=>{if(vid.paused) startVideo();},{once:true});
 vid.addEventListener('ended',()=>{vid.currentTime=0;});
 </script>
 </body>
